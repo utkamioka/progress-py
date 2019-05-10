@@ -12,9 +12,9 @@ class TestProgressHelper(TestCase):
             ProgressHelper(100, 0)
 
         p = ProgressHelper(-100, 100)
-        self.assertEqual(p.min, -100)
-        self.assertEqual(p.max, 100)
-        self.assertEqual(p.rate, 0.0)
+        self.assertEqual(p._min, -100)
+        self.assertEqual(p._max, 100)
+        self.assertEqual(p._rate, 0.0)
 
     def test_set(self):
         pool = []
@@ -43,7 +43,7 @@ class TestProgressHelper(TestCase):
 
         p = ProgressHelper(-100, 100, func=f)
 
-        for n in p.seq(range(4), 'c', msg='charlie'):
+        for n, _ in p.seq(range(4), 'c', msg='charlie'):
             pool.append(n)
 
         self.assertEqual(len(pool), 8)
